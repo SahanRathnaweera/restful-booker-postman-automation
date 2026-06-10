@@ -1,5 +1,8 @@
 # Restful-Booker API Automation Framework 🚀
 
+[![Postman API Testing CI](https://github.com/SahanRathnaweera/restful-booker-postman-automation/actions/workflows/postman-ci.yml/badge.svg)](https://github.com/SahanRathnaweera/restful-booker-postman-automation/actions/workflows/postman-ci.yml)
+
+
 This repository contains a fully automated API testing framework built using Postman and JavaScript for the Restful-Booker platform.
 
 ## 🛠️ Tech Stack & Tools
