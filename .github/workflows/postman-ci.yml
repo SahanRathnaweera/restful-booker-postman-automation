@@ -1,0 +1,35 @@
+name: Postman API Testing CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test-api:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install Newman & Reporter
+      run: |
+        npm install -g newman
+        npm install -g newman-reporter-htmlextra
+
+    - name: Run Postman Tests
+      run: |
+        newman run collections/booking_collection.json -e environments/booking_environment.json -r cli,htmlextra --reporter-htmlextra-export results/report.html
+
+    - name: Upload Test Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: postman-html-report
+        path: results/report.html
