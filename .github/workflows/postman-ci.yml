@@ -11,25 +11,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
+    - name: Checkout Repository
       uses: actions/checkout@v4
 
-    - name: Install Node.js
+    - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18'
+        node-version: '20'
 
-    - name: Install Newman & Reporter
-      run: |
-        npm install -g newman
-        npm install -g newman-reporter-htmlextra
+    - name: Install Newman
+      run: npm install -g newman
 
-    - name: Run Postman Tests
-      run: |
-        newman run collections/booking_collection.json -e environments/booking_environment.json -r cli,htmlextra --reporter-htmlextra-export results/report.html
-
-    - name: Upload Test Report
-      uses: actions/upload-artifact@v4
-      with:
-        name: postman-html-report
-        path: results/report.html
+    - name: Run Postman Collection
+      run: newman run "collections/Restful-Booker Framework.json" -e environments/booking_environment.json
